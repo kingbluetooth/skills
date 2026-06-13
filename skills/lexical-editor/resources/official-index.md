@@ -1,48 +1,92 @@
 # Official Lexical source index
 
-Prefer these official Meta sources over local toy examples. Local snippets should only summarize patterns or point to these files.
+## Start here
 
-## Playground architecture
+1. Editor.tsx
+2. Relevant plugin
+3. Concepts docs
+4. Only then invent code
 
-- `facebook/lexical/packages/lexical-playground/src/Editor.tsx`
-  - overall playground shell
-  - rich-text vs plain-text modes
-  - plugin composition
-  - collaboration gates
-  - floating anchor pattern
-  - viewport cleanup
+## Editor shell
 
-## Playground plugins
+`packages/lexical-playground/src/Editor.tsx`
 
-Use the plugin directory as the primary example bank:
+Use for:
 
-- `packages/lexical-playground/src/plugins/ToolbarPlugin`
-- `packages/lexical-playground/src/plugins/FloatingLinkEditorPlugin`
-- `packages/lexical-playground/src/plugins/FloatingTextFormatToolbarPlugin`
-- `packages/lexical-playground/src/plugins/MentionsExtension`
-- `packages/lexical-playground/src/plugins/AutoEmbedPlugin`
-- `packages/lexical-playground/src/plugins/ComponentPickerPlugin`
-- `packages/lexical-playground/src/plugins/ShortcutsPlugin`
-- `packages/lexical-playground/src/plugins/ActionsPlugin`
-- `packages/lexical-playground/src/plugins/TableActionMenuPlugin`
-- `packages/lexical-playground/src/plugins/TableCellResizer`
-- `packages/lexical-playground/src/plugins/CodeActionMenuPlugin`
-- `packages/lexical-playground/src/plugins/TreeViewPlugin`
-- `packages/lexical-playground/src/plugins/VersionsPlugin`
+- overall architecture
+- plugin composition
+- activeEditor pattern
+- floating anchor pattern
+- collaboration mode
+- feature flags
 
-## Official docs areas
+Never build one giant plugin.
 
-- `packages/lexical-website/docs/react/plugins.md`
-- `packages/lexical-website/docs/concepts/commands.md`
-- `packages/lexical-website/docs/concepts/listeners.md`
-- `packages/lexical-website/docs/concepts/node-transforms.md`
-- `packages/lexical-website/docs/concepts/serialization.md`
-- `packages/lexical-website/docs/concepts/selection.md`
-- `packages/lexical-website/docs/concepts/nodes.md`
-- `packages/lexical-website/docs/collaboration/react.md`
+## Plugin source of truth
 
-## Skill policy
+ToolbarPlugin
+- formatting commands
+- selection updates
+- active editor changes
 
-Do not invent examples when official examples exist. For implementation questions, first route the agent to the closest official playground plugin or docs page, then explain the pattern in product-specific terms.
+FloatingLinkEditorPlugin
+- link editing UI
+- anchor elements
+- floating controls
 
-Files in `resources/examples/` that are not official reproductions should be treated as temporary scaffolding and replaced with source-index notes or high-quality derived references.
+MentionsExtension
+- autocomplete
+- entity nodes
+- decorators
+
+ActionsPlugin
+- import/export
+- persistence
+- markdown
+
+Also consult:
+
+- ComponentPickerPlugin
+- AutoEmbedPlugin
+- ShortcutsPlugin
+- TableActionMenuPlugin
+- TableCellResizer
+- CodeActionMenuPlugin
+- TreeViewPlugin
+- VersionsPlugin
+
+## Concepts docs
+
+commands.md
+listeners.md
+node-transforms.md
+selection.md
+serialization.md
+nodes.md
+tables.md
+collaboration/react.md
+
+## Architecture rules
+
+- Prefer many plugins over one giant plugin.
+- Use commands instead of direct mutations.
+- Use transforms instead of update waterfalls.
+- Keep collaboration separate from persistence.
+- Persist Lexical JSON, not HTML.
+- Register nodes before loading state.
+- Use anchor elements for floating UI.
+- Maintain activeEditor correctly.
+- Clean up listeners.
+
+## Anti-patterns
+
+Avoid:
+
+- giant plugins
+- direct DOM mutations
+- HTML as canonical storage
+- state replacement every render
+- loading state before node registration
+- unbounded update listeners
+- update waterfalls
+- copy-pasting entire playground codebases

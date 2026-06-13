@@ -1,0 +1,26 @@
+{
+  "name": "kingbluetooth-skills",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Installable agent skills repository for AI coding workflows.",
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/validate-skills.mjs",
+    "validate": "node scripts/validate-skills.mjs"
+  },
+  "keywords": [
+    "agent-skills",
+    "skills-sh",
+    "ai-coding",
+    "claude-code",
+    "open-source"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kingbluetooth/skills.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}
